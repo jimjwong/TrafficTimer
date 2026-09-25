@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta name="description" content="A minimalist traffic-light countdown timer for talks, meetings, workshops, and events." />
+    <title>TrafficTimer</title>
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <section class="setup" id="setup" aria-labelledby="setup-title">
+        <div class="setup-panel">
+          <header class="setup-header">
+            <p class="eyebrow">TrafficTimer</p>
+            <h1 id="setup-title">Set the countdown</h1>
+          </header>
+
+          <form id="timer-form" novalidate>
+            <div class="field field-primary">
+              <label for="duration">Total time</label>
+              <input
+                id="duration"
+                name="duration"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                value="15:00"
+                aria-describedby="time-format"
+              />
+              <span id="time-format">MM:SS or HH:MM:SS</span>
+            </div>
+
+            <div class="thresholds" aria-label="Color change times">
+              <div class="field threshold amber-field">
+                <label for="amber-time"><span class="signal amber"></span>Amber at</label>
+                <input id="amber-time" name="amberTime" type="text" inputmode="numeric" autocomplete="off" value="10:00" />
+                <span>time remaining</span>
+              </div>
+
+              <div class="field threshold red-field">
+                <label for="red-time"><span class="signal red"></span>Red at</label>
+                <input id="red-time" name="redTime" type="text" inputmode="numeric" autocomplete="off" value="1:00" />
+                <span>time remaining</span>
+              </div>
+            </div>
+
+            <p class="error" id="form-error" role="alert" aria-live="polite"></p>
+
+            <div class="actions">
+              <button class="start-button" type="submit">Start timer</button>
+              <button class="fullscreen-button" id="setup-fullscreen" type="button">
+                <span class="fullscreen-icon" aria-hidden="true">⛶</span>
+                Fullscreen
+              </button>
+            </div>
+
+            <p class="credit">A work of <a href="https://jimjwong.com" target="_blank" rel="noopener noreferrer">Jim Wong</a></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="timer" id="timer" aria-label="Countdown timer" hidden>
+        <button class="stop-button" id="stop-button" type="button" aria-label="Stop timer and return to setup" title="Stop timer">
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="timer-center">
+          <p class="status" id="status">Time remaining</p>
+          <time class="clock" id="clock" datetime="PT15M">15:00</time>
+        </div>
+
+        <button class="timer-fullscreen" id="timer-fullscreen" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+          <span aria-hidden="true">⛶</span>
+          <span class="fullscreen-label">Fullscreen</span>
+        </button>
+
+        <a class="timer-credit" href="https://jimjwong.com" target="_blank" rel="noopener noreferrer">Jim Wong</a>
+      </section>
+    </main>
+
+    <script src="script.js?v=5"></script>
+  </body>
+</html>
