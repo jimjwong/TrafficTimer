@@ -29,14 +29,14 @@ Then open `http://localhost:9000`. Other devices can use the host computer's LAN
 
 ## Time format
 
-Enter times as `MM:SS` or `HH:MM:SS`. A plain number is interpreted as minutes.
+Each field uses a fixed `HH:MM:SS` display. Type digits as you would on a calculator: new digits enter from the right and shift left while the colons remain fixed. For example, typing `800` produces `00:08:00`, and typing `081922` produces `08:19:22`.
 
 For a 15-minute session that turns amber with 10 minutes remaining and red with 1 minute remaining:
 
 ```text
-Total time: 15:00
-Amber at:  10:00
-Red at:     1:00
+Total time: 00:15:00
+Amber at:  00:10:00
+Red at:    00:01:00
 ```
 
 ## Project structure

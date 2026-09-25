@@ -18,6 +18,72 @@ let wakeLock = null;
 let audioContext = null;
 let alarmPlayed = false;
 
+const timeInputs = [durationInput, amberInput, redInput];
+
+function formatInputDigits(digits) {
+  const padded = digits.replace(/\D/g, "").slice(-6).padStart(6, "0");
+  return `${padded.slice(0, 2)}:${padded.slice(2, 4)}:${padded.slice(4, 6)}`;
+}
+
+function setTimeInputDigits(input, digits, replace = false) {
+  const incomingDigits = digits.replace(/\D/g, "");
+  const currentDigits = replace || input.dataset.replaceOnNext === "true"
+    ? ""
+    : input.dataset.rawDigits || "";
+  const nextDigits = `${currentDigits}${incomingDigits}`.slice(-6);
+
+  input.dataset.rawDigits = nextDigits;
+  input.dataset.replaceOnNext = "false";
+  input.value = formatInputDigits(nextDigits);
+}
+
+function removeLastInputDigit(input) {
+  const currentDigits = input.dataset.replaceOnNext === "true"
+    ? ""
+    : input.dataset.rawDigits || "";
+  const nextDigits = currentDigits.slice(0, -1);
+
+  input.dataset.rawDigits = nextDigits;
+  input.dataset.replaceOnNext = "false";
+  input.value = formatInputDigits(nextDigits);
+}
+
+function initializeTimeInputs() {
+  timeInputs.forEach((input) => {
+    input.value = formatInputDigits(input.value);
+    input.dataset.rawDigits = input.value.replace(/\D/g, "");
+    input.dataset.replaceOnNext = "true";
+
+    input.addEventListener("beforeinput", (event) => {
+      if (event.inputType === "deleteContentBackward") {
+        event.preventDefault();
+        removeLastInputDigit(input);
+        return;
+      }
+
+      if (event.inputType === "deleteContentForward") {
+        event.preventDefault();
+        setTimeInputDigits(input, "", true);
+        return;
+      }
+
+      if (event.inputType.startsWith("insert") && event.inputType !== "insertFromPaste") {
+        event.preventDefault();
+        setTimeInputDigits(input, event.data || "");
+      }
+    });
+
+    input.addEventListener("paste", (event) => {
+      event.preventDefault();
+      setTimeInputDigits(input, event.clipboardData.getData("text"), true);
+    });
+
+    input.addEventListener("blur", () => {
+      input.dataset.replaceOnNext = "true";
+    });
+  });
+}
+
 function parseTime(value) {
   const cleanValue = value.trim();
 
@@ -31,7 +97,7 @@ function parseTime(value) {
   }
 
   const numbers = parts.map(Number);
-  if (numbers.some((number) => !Number.isSafeInteger(number)) || numbers.slice(1).some((number) => number > 59)) {
+  if (numbers.some((number) => !Number.isSafeInteger(number))) {
     return null;
   }
 
@@ -160,7 +226,7 @@ function validateTimes() {
   const red = parseTime(redInput.value);
 
   if (total === null || amber === null || red === null) {
-    return { error: "Use MM:SS or HH:MM:SS for each time." };
+    return { error: "Enter a valid HH:MM:SS value for each time." };
   }
 
   if (total <= 0) {
@@ -240,3 +306,5 @@ document.addEventListener("visibilitychange", () => {
     requestWakeLock();
   }
 });
+
+initializeTimeInputs();

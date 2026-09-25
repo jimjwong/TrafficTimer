@@ -26,22 +26,22 @@
                 type="text"
                 inputmode="numeric"
                 autocomplete="off"
-                value="15:00"
+                value="00:15:00"
                 aria-describedby="time-format"
               />
-              <span id="time-format">MM:SS or HH:MM:SS</span>
+              <span id="time-format">HH:MM:SS</span>
             </div>
 
             <div class="thresholds" aria-label="Color change times">
               <div class="field threshold amber-field">
                 <label for="amber-time"><span class="signal amber"></span>Amber at</label>
-                <input id="amber-time" name="amberTime" type="text" inputmode="numeric" autocomplete="off" value="10:00" />
+                <input id="amber-time" name="amberTime" type="text" inputmode="numeric" autocomplete="off" value="00:10:00" />
                 <span>time remaining</span>
               </div>
 
               <div class="field threshold red-field">
                 <label for="red-time"><span class="signal red"></span>Red at</label>
-                <input id="red-time" name="redTime" type="text" inputmode="numeric" autocomplete="off" value="1:00" />
+                <input id="red-time" name="redTime" type="text" inputmode="numeric" autocomplete="off" value="00:01:00" />
                 <span>time remaining</span>
               </div>
             </div>
@@ -80,6 +80,6 @@
       </section>
     </main>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
   </body>
 </html>
