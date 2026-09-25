@@ -51,6 +51,7 @@ button {
 
 .setup-panel {
   width: min(100%, 680px);
+  container-type: inline-size;
 }
 
 .setup-header {
@@ -68,7 +69,7 @@ button {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.1rem, 7vw, 4.8rem);
+  font-size: clamp(2.1rem, 11cqi, 4.8rem);
   font-weight: 760;
   line-height: 0.98;
   letter-spacing: 0;
@@ -111,7 +112,7 @@ h1 {
 
 .field-primary input {
   padding: 4px 0 12px;
-  font-size: clamp(2.3rem, 9vw, 5.2rem);
+  font-size: clamp(2.3rem, 12cqi, 5.2rem);
   font-weight: 680;
   line-height: 1;
 }
@@ -125,7 +126,7 @@ h1 {
 
 .threshold input {
   padding: 2px 0 10px;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 6.5cqi, 2.5rem);
   font-weight: 620;
 }
 
@@ -219,6 +220,7 @@ h1 {
   padding: 72px 28px;
   background: var(--green);
   color: #fff;
+  container-type: inline-size;
   transition: background-color 300ms ease;
 }
 
@@ -260,7 +262,7 @@ h1 {
 
 .status {
   margin: 0 0 clamp(8px, 2vh, 22px);
-  font-size: clamp(0.8rem, 2vw, 1.25rem);
+  font-size: clamp(0.8rem, 3.5cqi, 1.25rem);
   font-weight: 720;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -269,12 +271,24 @@ h1 {
 .clock {
   display: block;
   width: 100%;
-  font-size: clamp(4rem, 22vw, 19rem);
+  font-size: clamp(4.5rem, min(32cqi, 42dvh), 24rem);
   font-variant-numeric: tabular-nums;
   font-weight: 760;
   line-height: 0.86;
   letter-spacing: 0;
   white-space: nowrap;
+}
+
+.clock.has-hours {
+  font-size: clamp(3.5rem, min(20cqi, 38dvh), 18rem);
+}
+
+.clock.is-negative {
+  font-size: clamp(4rem, min(26cqi, 38dvh), 20rem);
+}
+
+.clock.has-hours.is-negative {
+  font-size: clamp(3rem, min(17cqi, 34dvh), 16rem);
 }
 
 .stop-button,
@@ -362,10 +376,6 @@ input:focus-visible {
 
   .fullscreen-button {
     width: 100%;
-  }
-
-  .clock {
-    font-size: clamp(3.4rem, 21vw, 7rem);
   }
 
   .fullscreen-label {

@@ -194,6 +194,8 @@ function updateTimer() {
   const showHours = Math.abs(secondsRemaining) >= 3600;
 
   clock.textContent = formatTime(secondsRemaining, showHours);
+  clock.classList.toggle("has-hours", showHours);
+  clock.classList.toggle("is-negative", secondsRemaining < 0);
   clock.dateTime = secondsRemaining >= 0 ? `PT${secondsRemaining}S` : `-PT${Math.abs(secondsRemaining)}S`;
   setColorState(secondsRemaining);
 
