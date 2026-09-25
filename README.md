@@ -2,7 +2,7 @@
 
 TrafficTimer is a minimalist, full-screen countdown timer with traffic-light color cues. It is designed for talks, workshops, meetings, performances, and any setting where the remaining time needs to be understood at a glance.
 
-Created by [Jim Wong](https://jimjwong.com).
+Created by [Jim Wong](https://jimjwong.com) with AI.
 
 ## Features
 
